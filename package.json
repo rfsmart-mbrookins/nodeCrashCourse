@@ -1,0 +1,15 @@
+{
+  "name": "nodecrashcourse",
+  "version": "1.0.0",
+  "description": "node js crash code",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --env-file=.env server.js"
+  },
+  "author": "michael s brookins",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
