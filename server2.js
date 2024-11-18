@@ -3,9 +3,9 @@ const PORT = process.env.PORT;
 
 
 const users = [
-    {id: 1, name: 'John Doe'},
-    {id: 2, name: 'Jane Doe'},
-    {id: 3, name: 'Jim Doe'}
+    {id: 1, name: 'John Jacob Jingleheimer Schmidt'},
+    {id: 2, name: 'Jane Schmidt'},
+    {id: 3, name: 'Jim Schmidt'}
 ];
 
 const server = createServer((req, res) => {
