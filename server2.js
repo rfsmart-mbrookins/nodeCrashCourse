@@ -10,13 +10,13 @@ const users = [
 
 //Logger middleware
 const Logger = (req, res, next) => {
-    res.setHeader('Content-Type', 'application/json');
+    console.log(`${req.method} ${req.url}`);
     next();
 }
 
 //JSON middleware
 const jsonMiddleware = (req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
+    res.setHeader('Content-Type', 'application/json');
     next();
 }
 
@@ -36,7 +36,25 @@ const getUserByIdHandler = (req, res) => {
         res.statusCode = 404;
         res.write(JSON.stringify({ message: 'User not found' }));
     }
+    res.end();
+
 };
+
+//Route handler for a POST /api/users
+const createUserHandler = (req, res) => {
+    let body = '';
+    //Listen for data
+    req.on('data', (chunk) => {
+        body += chunk.toString();
+    });
+    req.on('end', () => {
+        const newUser = JSON.parse(body);
+        users.push(newUser);
+        res.statusCode = 201;
+        res.write(JSON.stringify(newUser));
+        res.end();
+    });
+}
 
 //Route handler for not found
 const notFoundHandler= (req, res) => { 
@@ -46,16 +64,17 @@ const notFoundHandler= (req, res) => {
 }
 
 
+
 const server = createServer((req, res) => {
     Logger(req, res, () => {
         jsonMiddleware(req, res, () => {
             if (req.url === '/api/users' && req.method === 'GET') {
                 getUsersHandler(req, res);
-            } else if (
-                req.url.match(/\/api\/user\/([0-9]+0)/) &&
-                req.method === 'GET'
-            ) {
-                getUserByIdHandler(req, res);
+            } else if (req.url.match(/\/api\/users\/([0-9]+)/) && req.method === 'GET') {
+                const id = req.url.split('/')[3];
+                getUserByIdHandler(req, res, id);
+            } else if (req.url === '/api/users' && req.method === 'POST') {
+                createUserHandler(req, res);
             } else {
                 notFoundHandler(req, res);
             }
