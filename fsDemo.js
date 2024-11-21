@@ -32,7 +32,7 @@ const readFile = async () => {
 //writeFile()
 const writeFile = async () => {
   try {
-    await fs.writeFile('./test.txt', 'Write to file successful!!!');
+    await fs.writeFile('./test.txt', 'Write to file successful');
     console.log("File written to...");
   } catch (error) {
     console.log(error);
@@ -42,7 +42,7 @@ const writeFile = async () => {
 //appendFile()
 const appendFile = async () => {
   try {
-    await fs.appendFile('./test.txt', '\nThis is appended text!!!');
+    await fs.appendFile('./test.txt', '\nThis is appended text');
     console.log('File appended to...');
   } catch (error) {
     console.log(error);

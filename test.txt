@@ -1,2 +1,2 @@
-Write to file successful!!!
-This is appended text!!!
+Write to file successful
+This is appended text
